@@ -19,14 +19,13 @@ pagerDutyBaseUrl       = "https://#{pagerDutySubdomain}.pagerduty.com/api/v1"
 
 module.exports = (robot) ->
   # @optibot whos on call for Pagerduty Schedule Name? (can be spread out)
-  robot.hear /who(?:’s|'s|s| is|se)? (?:on call|oncall|on-call)(?: (?:for )?(.*?)(?:\?|$))?/i, (msg) ->
+  robot.respond /who(?:’s|'s|s| is|se)? (?:on call|oncall|on-call)(?: (?:for )?(.*?)(?:\?|$))?/i, (msg) ->
     scheduleName = msg.match[1]
     getScheduleFromScheduleName(msg, scheduleName)
 
   # whos the CFO? (one abbreviation, no spaces). Skips @optibot's handle being needed and allows for abbreviations to be programmed
-  robot.respond /who(?:’s|'s|s| is|se)? (?:(?:the )?(\S*))/i, (msg) ->
+  robot.hear /who(?:’s|'s|s| is|se)? (?:(?:the )?(\S*))/i, (msg) ->
     scheduleAbbreviation = msg.match[1]
-    console.log scheduleAbbreviation
     switch scheduleAbbreviation
       when "CFO" then getScheduleFromScheduleName(msg, 'Chief Frontend Officer')
       else return
