@@ -24,7 +24,7 @@ module.exports = (robot) ->
     getScheduleFromScheduleName(msg, scheduleName)
 
   # whos the CFO? (one abbreviation, no spaces). Skips @optibot's handle being needed and allows for abbreviations to be programmed
-  robot.hear /who(?:’s|'s|s| is|se)? (?:(?:the )?(\S*))/i, (msg) ->
+  robot.hear /who(?:’s|'s|s| is|se)? (?:(?:the )?([0-9A-Za-z]*))/i, (msg) ->
     scheduleAbbreviation = msg.match[1]
     switch scheduleAbbreviation
       when "CFO" then getScheduleFromScheduleName(msg, 'Chief Frontend Officer')
