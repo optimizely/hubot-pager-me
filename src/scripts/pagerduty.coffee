@@ -19,7 +19,7 @@ pagerDutyBaseUrl       = "https://#{pagerDutySubdomain}.pagerduty.com/api/v1"
 
 module.exports = (robot) ->
   # who is on call?
-  robot.respond /who(?:’s|'s|s| is|se)? (?:on call|oncall|on-call)(?: (?:for )?(.*?)(?:\?|$))?/i, (msg) ->
+  robot.hear /who(?:’s|'s|s| is|se)? (?:on call|oncall|on-call)(?: (?:for )?(.*?)(?:\?|$))?/i, (msg) ->
     scheduleName = msg.match[1]
 
     getDisplayScheduleString = (s, cb) ->
