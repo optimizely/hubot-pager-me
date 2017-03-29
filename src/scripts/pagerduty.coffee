@@ -21,7 +21,7 @@ module.exports = (robot) ->
   # @optibot whos on call for Pagerduty Schedule Name? (can be spread out)
   robot.hear /who(?:’s|'s|s| is|se)? (?:on call|oncall|on-call)(?: (?:for )?(.*?)(?:\?|$))?/i, (msg) ->
     scheduleName = msg.match[1]
-    getScheduleFromScheduleName(scheduleName)
+    getScheduleFromScheduleName(msg, scheduleName)
 
   # whos the CFO? (one abbreviation, no spaces). Skips @optibot's handle being needed and allows for abbreviations to be programmed
   robot.respond /who(?:’s|'s|s| is|se)? (?:(?:the )?(\S*))/i, (msg) ->
@@ -30,7 +30,7 @@ module.exports = (robot) ->
       when "CFO" then getScheduleFromScheduleName('Chief Frontend Officer')
       else return
 
-  getScheduleFromScheduleName = (scheduleName) ->
+  getScheduleFromScheduleName = (msg, scheduleName) ->
     getDisplayScheduleString = (s, cb) ->
       withCurrentOncall msg, s, (err, username, schedule) ->
         if !err && username && schedule
