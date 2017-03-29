@@ -17,7 +17,7 @@ pagerDutyApiKey        = process.env.HUBOT_PAGERDUTY_API_KEY
 pagerDutySubdomain     = process.env.HUBOT_PAGERDUTY_SUBDOMAIN
 pagerDutyBaseUrl       = "https://#{pagerDutySubdomain}.pagerduty.com/api/v1"
 
-module.exports = (scheduleName) ->
+module.exports = (robot) ->
   # @optibot whos on call for Pagerduty Schedule Name? (can be spread out)
   robot.hear /who(?:’s|'s|s| is|se)? (?:on call|oncall|on-call)(?: (?:for )?(.*?)(?:\?|$))?/i, (msg) ->
     scheduleName = msg.match[1]
