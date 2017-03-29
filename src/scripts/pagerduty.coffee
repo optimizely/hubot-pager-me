@@ -27,7 +27,7 @@ module.exports = (robot) ->
   robot.respond /who(?:’s|'s|s| is|se)? (?:(?:the )?(\S*))/i, (msg) ->
     scheduleAbbreviation = msg.match[1]
     switch scheduleAbbreviation
-      when "CFO" then getScheduleFromScheduleName('Chief Frontend Officer')
+      when "CFO" then getScheduleFromScheduleName(msg, 'Chief Frontend Officer')
       else return
 
   getScheduleFromScheduleName = (msg, scheduleName) ->
