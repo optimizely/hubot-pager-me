@@ -17,11 +17,20 @@ pagerDutyApiKey        = process.env.HUBOT_PAGERDUTY_API_KEY
 pagerDutySubdomain     = process.env.HUBOT_PAGERDUTY_SUBDOMAIN
 pagerDutyBaseUrl       = "https://#{pagerDutySubdomain}.pagerduty.com/api/v1"
 
-module.exports = (robot) ->
-  # who is on call?
+module.exports = (scheduleName) ->
+  # @optibot whos on call for Pagerduty Schedule Name? (can be spread out)
   robot.hear /who(?:’s|'s|s| is|se)? (?:on call|oncall|on-call)(?: (?:for )?(.*?)(?:\?|$))?/i, (msg) ->
     scheduleName = msg.match[1]
+    getScheduleFromScheduleName(scheduleName)
 
+  # whos the CFO? (one abbreviation, no spaces). Skips @optibot's handle being needed and allows for abbreviations to be programmed
+  robot.respond /who(?:’s|'s|s| is|se)? (?:(?:the )?(\S*))/i, (msg) ->
+    scheduleAbbreviation = msg.match[1]
+    switch scheduleAbbreviation
+      when "CFO" then getScheduleFromScheduleName('Chief Frontend Officer')
+      else return
+
+  getScheduleFromScheduleName = (scheduleName) ->
     getDisplayScheduleString = (s, cb) ->
       withCurrentOncall msg, s, (err, username, schedule) ->
         if !err && username && schedule
