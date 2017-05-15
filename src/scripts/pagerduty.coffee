@@ -27,8 +27,8 @@ module.exports = (robot) ->
   robot.hear /who(?:’s|'s|s| is|se)? (?:(?:the )?([0-9A-Za-z]*))/i, (msg) ->
     scheduleAbbreviation = msg.match[1]
     switch scheduleAbbreviation
-      when "CFO" then getScheduleFromScheduleName(msg, 'Chief Frontend Officer')
       when "Deploy Captain" then getScheduleFromScheduleName(msg, 'Build & Deploy Captain')
+      when "CFO" then getScheduleFromScheduleName(msg, 'Chief Frontend Officer')
       else return
 
   getScheduleFromScheduleName = (msg, scheduleName) ->
