@@ -28,6 +28,7 @@ module.exports = (robot) ->
     scheduleAbbreviation = msg.match[1]
     switch scheduleAbbreviation
       when "CFO" then getScheduleFromScheduleName(msg, 'Chief Frontend Officer')
+      when "Deploy Captain" then getScheduleFromScheduleName(msg, 'Build & Deploy Captain')
       else return
 
   getScheduleFromScheduleName = (msg, scheduleName) ->
